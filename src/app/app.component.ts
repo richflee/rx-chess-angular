@@ -97,25 +97,27 @@ export class AppComponent implements OnInit, AfterViewInit {
 
       const mouseDown$ = fromEvent(element, 'mousedown');
       const mouseMove$ = fromEvent(document, 'mousemove');
-      const mouseUp$ = fromEvent(element, 'mouseup');
+      const mouseUp$ = fromEvent(element, 'mouseup').pipe(startWith(null));
+      const docMouseUp$ = fromEvent(document, 'mouseup').pipe(startWith(null));
+
+      const combined$ = combineLatest(mouseUp$, docMouseUp$, (one, two) => true)
+        .pipe(skip(1));
 
       const o$ = mouseDown$
         .pipe(
           exhaustMap((e: MouseEvent) => {
 
-            const startX = e.offsetX;
-            const startY = e.offsetY;
-
+            const startX: number = e.offsetX;
+            const startY: number = e.offsetY;
             return mouseMove$.pipe(
               map((e: MouseEvent) => {
-                console.log('herrow', e);
                 return {
                   piece: e.target['dataset']['piece'],
                   x: e.clientX - startX,
                   y: e.clientY - startY
                 }
               }),
-              takeUntil(mouseUp$)
+              takeUntil(combined$)
             )
           })
         );
@@ -125,12 +127,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.subscribeAll(obs$);
   }
 
-  subscribeAll(obs: Observable<{ piece: string, x: number, y: number }>[]): void {
-    obs.forEach((o: Observable<{ piece: string, x: number, y: number }>) => {
-      o.subscribe((e: { piece: string, x: number, y: number }) => {
+  subscribeAll(dragEvents: Observable<{ piece: string, x: number, y: number }>[]): void {
+    dragEvents.forEach((mouseDrag: Observable<{ piece: string, x: number, y: number }>) => {
+      mouseDrag.subscribe((e: { piece: string, x: number, y: number }) => {
         if (e.piece) {
           const p: PieceViewModel = this.boardPieces[+e.piece];
-          console.log('setting!', e);
           p.x = `${e.x}px`;
           p.y = `${e.y}px`;
         }
