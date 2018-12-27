@@ -27,11 +27,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   boardColumns: number[] = new Array(8);
 
 
-  constructor(
-    private cd: ChangeDetectorRef
-  ) {}
-
-
   ngOnInit() {
     this.game = new Game();
     this.boardPieces = mapToGamePieceViewModels(this.game.pieces)
@@ -41,9 +36,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         p.y = this.evaluateYPosition(p);
         return p;
       });
-
-    // console.log('%cthis.boardPieces', 'color: cyan; font-weight: bold;');
-    // console.log('pieces', this.boardPieces);
   }
 
   ngAfterViewInit() {
@@ -64,13 +56,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
               return testMove$.pipe(
                 map((e: MouseEvent) => {
-                  console.log('herrow', e);
-                  console.log('startX', startX);
-                  console.log('clientX', e.clientX);
-                  // console.log('moveX', e.movementX);
-                  // console.log('moveY', e.movementY);
-                  // console.log('offsetX', e.offsetX);
-
                   return {
                     piece: e.target['dataset']['piece'],
                     x: e.clientX - startX,
