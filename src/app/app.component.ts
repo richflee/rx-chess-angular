@@ -113,8 +113,8 @@ export class AppComponent implements OnInit, AfterViewInit {
               map((e: MouseEvent) => {
                 return {
                   piece: e.target['dataset']['piece'],
-                  x: e.clientX - startX,
-                  y: e.clientY - startY
+                  x: (e.clientX + window.scrollX) - startX,
+                  y: (e.clientY + window.scrollY) - startY
                 }
               }),
               takeUntil(combined$)
