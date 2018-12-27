@@ -17,6 +17,8 @@ export abstract class Piece {
         return this.team === 'WHITE' ? 'W-' : 'B-';
     }
 
+    abstract displayIdentifier(): string;
+
     abstract move(toPosition: BoardPosition): BoardPosition;
 
     abstract canClaimWithMove(toPosition: BoardPosition): boolean;

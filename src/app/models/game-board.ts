@@ -10,38 +10,43 @@ export class GameBoard {
 
     constructor() {
         this.board = [];
-        const rowsCount = 8;
-        for (let i = 0; i < rowsCount; i++) {
-            if (i === 0 || i === (rowsCount - 1)) {
+
+        const maxRowsCount = 8;
+        const rowsCount = new Array(8).fill(null);;
+
+        const arrayOfRowsOfPieces = rowsCount.map((_, i) => {
+            if (i === 0 || i === (maxRowsCount - 1)) {
                 const team = i == 0 ? ChessTeam.WHITE : ChessTeam.BLACK;
-                this.board.push(this.populateInitialTeamRow(team));
-            } else if (i === 1 || i === (rowsCount - 2)) {
+                return this.populateInitialTeamRow(team, i);
+            } else if (i === 1 || i === (maxRowsCount - 2)) {
                 const team = i == 0 ? ChessTeam.WHITE : ChessTeam.BLACK;
-                this.board.push(this.populatePawnRow(team));
+                return this.populatePawnRow(team, i);
             } else {
-                this.board.push([null, null, null, null, null, null, null, null]);
+                return [null, null, null, null, null, null, null, null];
             }
-        }
+        });
+
+        this.board = arrayOfRowsOfPieces;
+        console.log('board', this.board);
     }
 
     private findPiece(row: number, column: number): object {
         return this.board[row][column];
     }
 
-    private populateInitialTeamRow(team: ChessTeam): Piece[] {
+    private populateInitialTeamRow(team: ChessTeam, rowPosition: number): Piece[] {
         const row = [];
         for (let j = 0; j < 8; j++) {
-            const r = new Rook({ x: j, y: 0 }, team === ChessTeam.WHITE ? ChessTeam.WHITE : ChessTeam.BLACK);
+            const r = new Rook({ x: j, y: rowPosition }, team === ChessTeam.WHITE ? ChessTeam.WHITE : ChessTeam.BLACK);
             row.push(r);
         }
-        console.log('populated', row);
         return row;
     }
 
-    private populatePawnRow(team: ChessTeam): Pawn[] {
+    private populatePawnRow(team: ChessTeam, rowPosition: number): Pawn[] {
         const row = [];
         for (let j = 0; j < 8; j++) {
-            const r = new Pawn({ x: j, y: 1 }, team === ChessTeam.WHITE ? ChessTeam.WHITE : ChessTeam.BLACK);
+            const r = new Pawn({ x: j, y: rowPosition }, team === ChessTeam.WHITE ? ChessTeam.WHITE : ChessTeam.BLACK);
             row.push(r);
         }
         return row;

@@ -12,19 +12,23 @@ export enum PlayerLabel {
 export class Game {
 
     public currentTurn: string = PlayerLabel[PlayerLabel.WHITE];
-    private _gameBoard: GameBoard;
+    public board: GameBoard = new GameBoard();
 
     constructor() {
-        this.init();
     }
 
     private init() {
-        this._gameBoard = new GameBoard();
-        console.log('gameboard', this.printBoard());
+        this.board = new GameBoard();
+    }
+
+    get pieces(): Piece[] {
+        return this.board.board.reduce((accumulatedPieces: Piece[], curr: Piece[]) => {
+            return accumulatedPieces.concat(curr);
+        }, [])
     }
 
     public printBoard() {
-        const board = this._gameBoard.board;
+        const board = this.board.board;
 
         const displayBoard = board.map((row: Array<object>) => {
             return row.map(this.objectToBoardDisplay)
@@ -53,6 +57,6 @@ export class Game {
     }
 
     public validateMove(piece: 'string', destination: BoardPosition): boolean {
-        return this._gameBoard.pieceAtPosition(piece);
+        return this.board.pieceAtPosition(piece);
     }
 }

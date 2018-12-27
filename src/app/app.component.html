@@ -1,0 +1,22 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+
+<p>Your turn: {{game?.currentTurn}}</p>
+
+<!-- <div class="piece-piece" [ngStyle]="{'top': testYPos, 'left': testXPos }"></div> -->
+
+<div class="game-board">
+  <div *ngFor="let row of boardRows; let i = index" class="game-board__row">
+    <div *ngFor="let col of boardColumns" class="game-board__cell" [ngClass]="{evenRow: i%2===0}"></div>
+  </div>
+</div>
+
+<div *ngFor="let piece of boardPieces; let i = index" class="game-piece"
+  [attr.data-piece]="i"
+  [ngStyle]="{'top': piece.y, 'left': piece.x }"></div>
+
+<router-outlet></router-outlet>

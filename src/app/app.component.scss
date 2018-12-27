@@ -1,0 +1,44 @@
+.piece-piece {
+    background-color: cyan;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 200px;
+    left: 20px;
+}
+
+
+.game-board {
+    border: 1px solid cornflowerblue;
+    &__row {
+        display: flex;
+        flex-wrap: wrap;
+        flex-grow: 1;
+    }
+    &__cell {
+        background: cornflowerblue;
+        flex-grow: 1;
+        height: 60px;
+        width: 12.5%;
+
+        &:nth-child(odd) {
+            background: white;
+        }
+
+        &.evenRow {
+            &:nth-child(odd) {
+                background: cornflowerblue;
+            }
+            &:nth-child(even) {
+                background: white;
+            }
+        }
+    }
+}
+
+.game-piece {
+    height: 30px; 
+    width: 30px;
+    background-color: mediumaquamarine;
+    position: absolute;
+}
