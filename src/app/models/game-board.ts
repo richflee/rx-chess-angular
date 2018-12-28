@@ -16,10 +16,10 @@ export class GameBoard {
 
         const arrayOfRowsOfPieces = rowsCount.map((_, i) => {
             if (i === 0 || i === (maxRowsCount - 1)) {
-                const team = i == 0 ? ChessTeam.WHITE : ChessTeam.BLACK;
+                const team = i === 0 ? ChessTeam.WHITE : ChessTeam.BLACK;
                 return this.populateInitialTeamRow(team, i);
             } else if (i === 1 || i === (maxRowsCount - 2)) {
-                const team = i == 0 ? ChessTeam.WHITE : ChessTeam.BLACK;
+                const team = i === 1 ? ChessTeam.WHITE : ChessTeam.BLACK;
                 return this.populatePawnRow(team, i);
             } else {
                 return [null, null, null, null, null, null, null, null];

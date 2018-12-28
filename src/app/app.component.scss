@@ -22,7 +22,7 @@
         width: 12.5%;
 
         &:nth-child(odd) {
-            background: white;
+            background: pink;
         }
 
         &.evenRow {
@@ -30,7 +30,7 @@
                 background: cornflowerblue;
             }
             &:nth-child(even) {
-                background: white;
+                background: pink;
             }
         }
     }
@@ -39,6 +39,12 @@
 .game-piece {
     height: 30px; 
     width: 30px;
-    background-color: mediumaquamarine;
+    background-color: white;
+    cursor: pointer;
     position: absolute;
+    text-align: center;
+
+    &.teamBlack {
+        background-color: black;
+    }
 }
