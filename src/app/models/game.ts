@@ -22,9 +22,31 @@ export class Game {
     }
 
     get pieces(): Piece[] {
-        return this.board.board.reduce((accumulatedPieces: Piece[], curr: Piece[]) => {
+        const accumulated = this.board.board.reduce((accumulatedPieces: Piece[], curr: Piece[]) => {
             return accumulatedPieces.concat(curr);
-        }, [])
+        }, []);
+
+        const pieceIdentifiers: string[] = [];
+        return accumulated.reduce((acc: Piece[], curr: Piece) => {
+            if (!curr) {
+                acc.push(curr);
+                return acc;
+            }
+
+            const identifier = curr.displayIdentifier();
+            const validatedIdentifier = this.validatePieceIdentifier(pieceIdentifiers, identifier);
+            curr.uniqueIdentifier = validatedIdentifier;
+            acc.push(curr);
+            return acc;
+        }, []);
+    }
+
+    public validatePieceIdentifier(currentIdentifiers: string[], identifier: string): string {
+        if (currentIdentifiers.includes(identifier)) {
+            identifier = `${identifier}__2`;
+            this.validatePieceIdentifier(currentIdentifiers, identifier);
+        }
+        return identifier;
     }
 
     public printBoard() {

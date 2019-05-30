@@ -20,11 +20,11 @@ export class PieceViewModel {
         this.yPos = cp.yPos;
         this.x = '0px';
         this.y = '0px';
-        this.piece = cp;
+        this.piece = piece;
 
         this.description = (piece.constructor === Rook)
-            ? 'Rook'
-            : 'Pawn';
+            ? `${this.team}-Rook`
+            : `${this.team}-Pawn`;
     }
 
     displayPrefix(): string {

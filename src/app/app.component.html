@@ -15,10 +15,65 @@
   </div>
 </div>
 
-<div *ngFor="let piece of boardPieces; let i = index" class="game-piece"
+<!-- <div *ngFor="let piece of boardPieces; let i = index" class="game-piece"
   [attr.data-piece]="i"
   [ngClass]="{teamBlack: piece.team === 'black'}"
   [ngStyle]="{'top': piece.y, 'left': piece.x }">
-</div>
+</div> -->
+
+
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-ROOK']?.y, 'left': piecesMap['W-ROOK']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-KNIGHT']?.y, 'left': piecesMap['W-KNIGHT']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-BISHOP']?.y, 'left': piecesMap['W-BISHOP']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-QUEEN']?.y, 'left': piecesMap['W-QUEEN']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-KING']?.y, 'left': piecesMap['W-KING']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-BISHOP']?.y, 'left': piecesMap['W-BISHOP']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-KNIGHT']?.y, 'left': piecesMap['W-KNIGHT']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-ROOK']?.y, 'left': piecesMap['W-ROOK']?.x }"></div>
+
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-PAWN']?.y, 'left': piecesMap['W-PAWN']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-PAWN__2']?.y, 'left': piecesMap['W-__2']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-PAWN__3']?.y, 'left': piecesMap['W-__3']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-PAWN__4']?.y, 'left': piecesMap['W-__4']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-PAWN__5']?.y, 'left': piecesMap['W-__5']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-PAWN__6']?.y, 'left': piecesMap['W-__6']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-PAWN__7']?.y, 'left': piecesMap['W-__7']?.x }"></div>
+<div class="game-piece"
+[ngStyle]="{'top': piecesMap['W-PAWN__8']?.y, 'left': piecesMap['W-__8']?.x }"></div>
+
+
+  <!-- blackRook: Rook;
+  blackKnight: Piece; // Knight;
+  blackBishop: Piece; // Bishop;
+  blackQueen: Piece; // Queen;
+  blackKing: Piece; // King;
+  blackBishop2: Piece; // Bishop;
+  blackKnight2: Piece; // Knight;
+  blackRook2: Rook;
+  blackPawn: Pawn;
+  blackPawn2: Pawn;
+  blackPawn3: Pawn;
+  blackPawn4: Pawn;
+  blackPawn5: Pawn;
+  blackPawn6: Pawn;
+  blackPawn7: Pawn;
+  blackPawn8: Pawn; -->
+
+
 
 <router-outlet></router-outlet>

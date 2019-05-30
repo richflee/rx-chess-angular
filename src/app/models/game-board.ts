@@ -1,8 +1,12 @@
-import { BoardPosition } from "./board-position";
-import { Rook } from "./rook";
-import { Pawn } from "./pawn";
-import { Piece } from "./piece";
-import { ChessTeam } from "./chess-team.enum";
+import { BoardPosition } from './board-position';
+import { Rook } from './rook';
+import { Pawn } from './pawn';
+import { Piece } from './piece';
+import { ChessTeam } from './chess-team.enum';
+import { Bishop } from './bishop';
+import { Knight } from './knight';
+import { Queen } from './queen';
+import { King } from './king';
 
 export class GameBoard {
 
@@ -12,7 +16,7 @@ export class GameBoard {
         this.board = [];
 
         const maxRowsCount = 8;
-        const rowsCount = new Array(8).fill(null);;
+        const rowsCount = new Array(8).fill(null);
 
         const arrayOfRowsOfPieces = rowsCount.map((_, i) => {
             if (i === 0 || i === (maxRowsCount - 1)) {
@@ -37,7 +41,19 @@ export class GameBoard {
     private populateInitialTeamRow(team: ChessTeam, rowPosition: number): Piece[] {
         const row = [];
         for (let j = 0; j < 8; j++) {
-            const r = new Rook({ x: j, y: rowPosition }, team === ChessTeam.WHITE ? ChessTeam.WHITE : ChessTeam.BLACK);
+            let r;
+            if (j === 1 || j === 6) {
+                r = new Knight({ x: j, y: rowPosition }, team === ChessTeam.WHITE ? ChessTeam.WHITE : ChessTeam.BLACK);
+            } else if (j === 2 || j === 5) {
+                r = new Bishop({ x: j, y: rowPosition }, team === ChessTeam.WHITE ? ChessTeam.WHITE : ChessTeam.BLACK);
+            } else if (j === 3) {
+                r = new Queen({ x: j, y: rowPosition }, team === ChessTeam.WHITE ? ChessTeam.WHITE : ChessTeam.BLACK);
+            } else if (j === 4) {
+                r = new King({ x: j, y: rowPosition }, team === ChessTeam.WHITE ? ChessTeam.WHITE : ChessTeam.BLACK);
+            } else {
+                r = new Rook({ x: j, y: rowPosition }, team === ChessTeam.WHITE ? ChessTeam.WHITE : ChessTeam.BLACK);
+            }
+
             row.push(r);
         }
         return row;
